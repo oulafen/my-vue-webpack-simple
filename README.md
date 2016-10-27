@@ -66,21 +66,21 @@ new app({
 ```html
 <template>
   <div class="main">
-    <router-view
-            keep-alive
-            transition="fade"
-            transition-mode='out-in'></router-view>
+    <transition name="fade" mode="out-in" appear>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 ```
 
-- 添加页面过渡css
+- 添加页面过渡css(vue2.0和1.0有些许差别, 详情看[文档](https://vuejs.org/guide/migration.html))
 ```css
-.fade-transition {
+.fade-enter-active, .fade-leave-active {
     transition: opacity 0.3s ease;
 }
-.fade-enter,
-.fade-leave {
+.fade-enter, .fade-leave-active {
     opacity: 0;
 }
 ```

@@ -1,8 +1,9 @@
 <template>
   <div class="main">
-    <router-view
-            keep-alive
-            transition="fade"
-            transition-mode='out-in'></router-view>
+    <transition name="fade" mode="out-in" appear>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>

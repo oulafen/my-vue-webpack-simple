@@ -1,9 +1,8 @@
 /*切换动画*/
-.fade-transition {
+.fade-enter-active, .fade-leave-active {
     transition: opacity 0.3s ease;
 }
-.fade-enter,
-.fade-leave {
+.fade-enter, .fade-leave-active {
     opacity: 0;
 }
 body{
@@ -13,4 +12,11 @@ body{
     width: 100%;
     max-width: 500px;
     margin: auto;
+}
+.index{
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    background: #f8f8f8;
 }

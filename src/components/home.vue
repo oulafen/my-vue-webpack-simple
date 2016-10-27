@@ -19,12 +19,10 @@
     <ol>
       <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
     </ol>
-    <my_footer></my_footer>
   </div>
 </template>
 
 <script>
-import my_footer from './footer.vue'
 
 export default {
   name: 'home',
@@ -39,7 +37,6 @@ export default {
     }
   },
   components:{
-    'my_footer': my_footer,
     'todo-item': {
       props: ['todo'],
       template: '<li>{{ todo.text }}</li>'
@@ -53,7 +50,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #home {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
