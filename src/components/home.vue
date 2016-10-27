@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <img src="../assets/logo.png">
+  <div id="home">
+    <img src="../../statics/images/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -19,19 +19,15 @@
     <ol>
       <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
     </ol>
+    <my_footer></my_footer>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue';
-
-  Vue.component('todo-item', {
-    props: ['todo'],
-    template: '<li>{{ todo.text }}</li>'
-  });
+import my_footer from './footer.vue'
 
 export default {
-  name: 'app',
+  name: 'home',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -40,6 +36,13 @@ export default {
         { text: 'Learn Vue' },
         { text: 'Build something awesome' }
       ]
+    }
+  },
+  components:{
+    'my_footer': my_footer,
+    'todo-item': {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
     }
   },
   route:{
@@ -51,7 +54,7 @@ export default {
 </script>
 
 <style>
-#app {
+#home {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,6 +1,11 @@
 # my-vue-webpack-simple
 
 > A Vue.js 2.0 project 
+## init project
+```bash
+npm install vue-cli -g  #install vue-cli
+vue init webpack-sample my-vue-webpack-simple  # 创建基于模板webpack-sample的vue项目
+```
 
 ## Build Setup
 
@@ -17,12 +22,13 @@ npm run build
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-# NEXT(接下来balabala的事儿)
+# Next(开刀阔斧balabala的事儿)
 ## 使用vue-router
 - 安装 `npm install vue-router --save`
 - 配置router
+
 `./src/main.js`文件:
-```
+```javascript
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -56,8 +62,8 @@ new app({
 }).$mount('#app');
 ```
 
-`./src/App.vue`文件:
-```
+- 设置路由模板`./src/App.vue`文件:
+```html
 <template>
   <div class="main">
     <router-view
@@ -67,3 +73,57 @@ new app({
   </div>
 </template>
 ```
+
+- 添加页面过渡css
+```css
+.fade-transition {
+    transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave {
+    opacity: 0;
+}
+```
+
+## 添加组件
+ - 改写`home.vue`
+```vue
+<template>
+    <div id="home">
+     <h1>{{ msg }}</h1>
+     <ol>
+       <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
+     </ol>
+     <my_footer></my_footer>
+    </div>
+</template>
+<script>
+import my_footer from './footer.vue'
+export default {
+  name: 'home',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      todos: [
+        { text: 'Learn JavaScript' },
+        { text: 'Learn Vue' },
+        { text: 'Build something awesome' }
+      ]
+    }
+  },
+  components:{
+    'my_footer': my_footer,
+    'todo-item': {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    }
+  },
+  route:{
+    data() {
+      /*每次切换路由，在渲染出页面前都会执行*/
+    }
+  }
+}
+</script>
+```
+ 
