@@ -1,23 +1,28 @@
 <template>
     <div class="new">
-        <div class="weui-form-preview" v-for="list in lists">
-            <div class="weui-form-preview__hd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">付款金额</label>
-                    <em class="weui-form-preview__value">¥{{ list.num }}</em>
+        <div class="weui-panel">
+            <div class="weui-panel__hd">关于router示例列表</div>
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <router-link :to="{ name: 'user', params: { id: userId }}" class="weui-cell weui-cell_access" >
+                            <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>动态路由匹配</p>
+                            </div>
+                            <span class="weui-cell__ft"></span>
+                        </router-link>
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>文字标题</p>
+                            </div>
+                            <span class="weui-cell__ft"></span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="weui-form-preview__bd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">商品</label>
-                    <span class="weui-form-preview__value">{{ list.name }}</span>
-                </div>
-            </div>
-            <div class="weui-form-preview__ft">
-                <router-link to="/detail" class="weui-form-preview__btn weui-form-preview__btn_primary">详情</router-link>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -25,33 +30,12 @@
     export default{
         data(){
             return{
-                lists: [
-                    {
-                        num: 2400.00,
-                        name: '电动打印机'
-                    },
-                    {
-                        num: 12.00,
-                        name: '数据线'
-                    },
-                    {
-                        num: 14.00,
-                        name: '西红柿炒鸡蛋'
-                    },
-                    {
-                        num: 199.00,
-                        name: '转账'
-                    },
-                    {
-                        num: 130.00,
-                        name: '马丁靴'
-                    },
-                    {
-                        num: 200.00,
-                        name: '印花裙'
-                    }
-                ]
+                lists: [],
+                userId: parseInt(Math.random()*10)
             }
+        },
+        method: {
+
         }
     }
 </script>

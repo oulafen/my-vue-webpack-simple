@@ -9,6 +9,7 @@ import home from './components/home.vue';
 import personal from './components/personal.vue';
 import news from './components/news.vue';
 import detail from './components/detail.vue';
+import user from './components/user.vue';
 
 
 const app = Vue.extend(App);
@@ -19,7 +20,8 @@ const routes = [
   { path: '/home', component: home },
   { path: '/news', component: news },
   { path: '/personal', component: personal },
-  { path: '/detail', component: detail }
+  { path: '/detail', component: detail },
+  { path: '/user/:id', component: user , name: 'user'}
 ];
 
 const router = new VueRouter({

@@ -98,6 +98,7 @@ new app({
     </div>
 </template>
 <script>
+//定义组件
 import my_footer from './footer.vue'
 export default {
   name: 'home',
@@ -111,19 +112,33 @@ export default {
       ]
     }
   },
-  components:{
+  components:{  //引入组件
     'my_footer': my_footer,
     'todo-item': {
       props: ['todo'],
       template: '<li>{{ todo.text }}</li>'
     }
-  },
-  route:{
-    data() {
-      /*每次切换路由，在渲染出页面前都会执行*/
-    }
   }
 }
 </script>
 ```
+- 添加`footer.vue`
+```
+<template>
+    <div class="weui-footer">
+        <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+        </p>
+        <p class="weui-footer__text">Copyright © 2008-2016 weui.io</p>
+    </div>
+</template>
+```
+
+## 问题总结
+- build项目之后, 静态资源的如图片加载失败
+    原因肯定是路径不对, 所以才找不到, 建议将`webpack.config.js`中的`publicPath`改为路径`dist/`, 若不行,再查看其它有关路径设置的地方
+    
+
+
  
