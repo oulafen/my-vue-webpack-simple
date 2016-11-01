@@ -134,6 +134,79 @@ export default {
     </div>
 </template>
 ```
+## 使用简单的markdown编辑器
+[示例地址](http://blog.oulafen.com/my-vue-webpack-simple/markdown)
+- 引入官网marked文件
+```javascript
+import marked from '../../statics/js/marked@0.3.6.js'
+```
+- 使用marked方法来计算输入的内容
+```html
+<template>
+    <div id="editor">
+        <textarea :value="input" v-model="input"></textarea>
+        <div class="weui-panel">
+            <div class="weui-panel__hd">markdown预览</div>
+            <div class="box"  v-html="compiledMarkdown"></div>
+        </div>
+    </div>
+</template>
+<script>
+    import marked from '../../statics/js/marked@0.3.6.js'
+    export default{
+        name:'editor',
+        data(){
+            return {
+                input: '# input markdown'
+            }
+        },
+        computed: {
+            compiledMarkdown: function () {
+                return marked(this.input, {
+                    sanitize: true
+                })
+            }
+        }
+    }
+</script>
+<style>
+# balabala 省略
+</style>
+```
+- 给代码加高亮
+引入highlight的js和css, 再在marked方法中配置下就OK了, 以下给出增加的代码片段, 插到相应位置上就可以了
+```
+<link rel="stylesheet" href="../../statics/css/solarized_light.min.css">
+import hljs from '../../statics/js/highlight.min'
+
+return marked(this.input, {
+    sanitize: true,
+    highlight: function(code, lang) {
+        return hljs.highlightAuto(code, [lang]).value;
+    }
+})
+```
+- 更多的设置自行google
+源码中默认的配置参数:
+```javascript
+marked.defaults = {
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  sanitizer: null,
+  mangle: true,
+  smartLists: false,
+  silent: false,
+  highlight: null,
+  langPrefix: 'lang-',
+  smartypants: false,
+  headerPrefix: '',
+  renderer: new Renderer,
+  xhtml: false
+};
+```
 
 ## 问题总结
 - build项目之后, 静态资源的如图片加载失败

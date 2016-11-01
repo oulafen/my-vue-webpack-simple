@@ -10,6 +10,8 @@ import personal from './components/personal.vue';
 import news from './components/news.vue';
 import detail from './components/detail.vue';
 import user from './components/user.vue';
+import form from './components/form.vue';
+import markdown from './components/markdown.vue';
 
 
 const app = Vue.extend(App);
@@ -21,7 +23,9 @@ const routes = [
   { path: '/news', component: news },
   { path: '/personal', component: personal },
   { path: '/detail', component: detail },
-  { path: '/user/:id', component: user , name: 'user'}
+  { path: '/user/:id', component: user , name: 'user'},
+  { path: '/form', component: form },
+  { path: '/markdown', component: markdown }
 ];
 
 const router = new VueRouter({
