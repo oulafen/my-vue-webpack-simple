@@ -135,7 +135,7 @@ export default {
 </template>
 ```
 ## 使用简单的markdown编辑器
-[示例地址](http://blog.oulafen.com/my-vue-webpack-simple/markdown)
+[示例地址](http://blog.oulafen.com/my-vue-webpack-simple/#/markdown)
 - 引入官网marked文件
 ```javascript
 import marked from '../../statics/js/marked@0.3.6.js'

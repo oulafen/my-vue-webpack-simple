@@ -21,12 +21,12 @@
 <script>
     import personal from './personal.vue'
     import home from './home.vue'
-    import news from './news.vue'
+    import lists from './lists.vue'
     export default{
         data(){
             return{
                 tabs:[
-                    {tabName: '消息'},
+                    {tabName: '练习'},
                     {tabName: '首页'},
                     {tabName: '我的'}
                 ],
@@ -35,7 +35,7 @@
             }
         },
         components:{
-            'view_0':news,
+            'view_0':lists,
             'view_1':home,
             'view_2':personal
         },
