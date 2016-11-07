@@ -45,6 +45,7 @@ export default {
 
 <style lang="css" scoped>
     #editor{
+        margin-top: 20px
         height: 500px;
     }
     .wangEditor-container{
