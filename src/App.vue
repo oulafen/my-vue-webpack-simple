@@ -7,3 +7,6 @@
     </transition>
   </div>
 </template>
+<script>
+
+</script>

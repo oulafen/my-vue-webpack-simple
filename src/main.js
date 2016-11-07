@@ -12,7 +12,7 @@ import detail from './components/detail.vue';
 import user from './components/user.vue';
 import form from './components/form.vue';
 import markdown from './components/markdown.vue';
-
+import editor_demo from './components/editor-demo.vue';
 
 const app = Vue.extend(App);
 
@@ -25,7 +25,8 @@ const routes = [
   { path: '/detail', component: detail },
   { path: '/user/:id', component: user , name: 'user'},
   { path: '/form', component: form },
-  { path: '/markdown', component: markdown }
+  { path: '/markdown', component: markdown },
+  { path: '/editor_demo', component: editor_demo }
 ];
 
 const router = new VueRouter({

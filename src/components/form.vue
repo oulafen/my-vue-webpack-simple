@@ -1,11 +1,10 @@
 <template>
     <div class="sign">
-        <div class="weui-cells__title">表单</div>
+        <div class="weui-cells__title">表单-发布活动</div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入昵称">
+                    <input class="weui-input" type="text" placeholder="活动名称">
                 </div>
             </div>
             <div class="weui-cell weui-cell_vcode">

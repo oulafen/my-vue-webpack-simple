@@ -23,11 +23,16 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)$/,
         loader: 'file',
         options: {
+          limit: 50000,
           name: '[name].[ext]?[hash]'
         }
+      },
+      { 
+        test: /\.css$/, 
+        loader: "style-loader!css-loader" 
       }
     ]
   },
