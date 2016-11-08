@@ -8,5 +8,11 @@
   </div>
 </template>
 <script>
+import zepto from '../statics/js/lib/zepto.js'
 
+export default{
+	mounted() {
+        $('.loading').hide();
+    }
+}
 </script>

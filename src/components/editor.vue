@@ -20,9 +20,8 @@ export default {
         createEditor() {
             const self = this
             const editor = new WangEditor('editor')
-            editor.config.menus = [ 'bold', 'underline', 'italic', 'forecolor', 'fontsize', 'alignleft', 'aligncenter', 'alignright',
-                'img', 'undo', 'redo'
-            ]
+            editor.config.menus = [ 'bold', 'forecolor', 'fontsize', 'unorderlist', 'quote',
+                'img']
             editor.config.uploadImgUrl = this.uploadUrl
             editor.onchange = function() {
                 self.formatContent(this.$txt.html())
@@ -32,7 +31,7 @@ export default {
         formatContent(content) {
             // handle
             // ...
-            this.content = content
+            this.content = content;
             this.outputContent()
         },
         outputContent() {
@@ -45,8 +44,7 @@ export default {
 
 <style lang="css" scoped>
     #editor{
-        margin-top: 20px
-        height: 500px;
+        height: 300px;
     }
     .wangEditor-container{
         border-radius: 2px;
