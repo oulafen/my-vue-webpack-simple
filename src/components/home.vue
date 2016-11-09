@@ -1,12 +1,5 @@
 <template>
   <div id="home">
-    <div id="loadingToast" style="opacity: 1;" v-if="loading">
-      <div class="weui-mask_transparent"></div>
-      <div class="weui-toast">
-        <i class="weui-loading weui-icon_toast"></i>
-        <p class="weui-toast__content">数据加载中</p>
-      </div>
-    </div>
 
     <div v-if="error" class="error">
       {{ error }}
@@ -35,7 +28,6 @@
 </template>
 
 <script>
-//  import Indicator from 'vue-indicator'
 
 export default {
   name: 'home',
@@ -61,40 +53,8 @@ export default {
   created () {
     // 组件创建完后获取数据，
     // 此时 data 已经被 observed 了
-    this.fetchData()
-  },
-  watch: {
-    // 如果路由有变化，会再次执行该方法
-    '$route': 'fetchData'
   },
   methods: {
-//    'showIndicator': function(){
-//      console.log('in indicator')
-//      Indicator.open({ text:'Loading...', spinnerType: 'fading-circle' });
-//    },
-    'fetchData': function () {
-      this.error = this.post = null;
-//      this.loading = true;
-      // replace getPost with your data fetching util / API wrapper
-      setTimeout(function(){
-        this.post = 'newDate';
-        this.loading = false;
-      },2000);
-//      $.ajax({
-//        type: 'POST',
-//        url: '/home/index',
-//        data: {id: this.$route.params.id},
-//        dataType: 'json',
-//        success: function (post) {
-//          this.post = post;
-//          this.loading = false;
-//        },
-//        error: function(err){
-//          this.error = err.toString();
-//          this.loading = false;
-//        }
-//      })
-    }
   }
 }
 </script>

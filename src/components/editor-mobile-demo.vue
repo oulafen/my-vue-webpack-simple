@@ -1,19 +1,29 @@
 <template lang="html">
-    <div class="mobile-editor">
-        <link rel="stylesheet" type="text/css" href="./statics/css/wangEditor-mobile.css">
-        <textarea id="editorMobile" style="width:100%;height:300px;" >
-            <p>请输入内容...</p>
-        </textarea>
+    <div class="mobile-demo">
+        <div class="editor-box" >
+            <p>移动端编辑器</p>
+            <div class="mobile-editor">
+                <link rel="stylesheet" type="text/css" href="./statics/css/wangEditor-mobile.css">
+                <textarea id="editorMobile" style="width:100%;height:300px;" >
+                    <p>请输入内容...</p>
+                </textarea>
+            </div>
+            <input type="button" name="name" value="submit" @click="submit">
+        </div>
+        <div class="editor-box" style="background:#fff;">
+            <p>输入结果</p>
+            <div v-html="content"></div>
+        </div>
     </div>
 </template>
 
 <script>
 import mobileEditor from '../../statics/js/wangEditor-mobile.js'
 export default {
-    props: ['inputContent', 'uploadUrl'],
     data() {
         return {
-            content: ''
+            content: '',
+            uploadUrl: 'api/img'
         }
     },
     computed: {
@@ -23,7 +33,7 @@ export default {
     },
     methods: {
         submit() {
-            console.log(this.content)
+           console.log(this.content)
         },
         createEditor() {
             const self = this
@@ -58,16 +68,9 @@ export default {
             $_txt.on('blur', function(){
                 var _current = $_txt.html();
                  if(_current != self.content){
-                    self.formatContent(_current)
+                    self.content = _current;
                  }
             })
-        },
-        formatContent(content) {
-            this.content = content;
-            this.outputContent()
-        },
-        outputContent() {
-            this.$emit('input', this.content)
         }
     },
     components: {}
@@ -75,6 +78,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+    .editor-box{
+        margin-top: 40px;
+    }
    .mobile-editor{
         background-color: #fff;
         border-radius: 2px;

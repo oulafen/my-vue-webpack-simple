@@ -1,12 +1,14 @@
 var path = require('path')
-var webpack = require('webpack')
+var webpack = require('webpack');
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common');
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: 'dist/',
-    filename: 'build.js'
+    filename: '[name].js',
+    chunkFilename: "chunts/[name]-[chunkhash:8].js"
   },
   module: {
     rules: [
@@ -36,6 +38,7 @@ module.exports = {
       }
     ]
   },
+  plugins: [ commonsPlugin ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue'
@@ -47,6 +50,53 @@ module.exports = {
   },
   devtool: '#eval-source-map'
 }
+
+// module.exports = {
+//   entry: './src/main.js',
+//   output: {
+//     path: path.resolve(__dirname, './dist'),
+//     publicPath: 'dist/',
+//     filename: 'build.js'
+//   },
+//   module: {
+//     rules: [
+//       {
+//         test: /\.vue$/,
+//         loader: 'vue',
+//         options: {
+//           // vue-loader options go here
+//         }
+//       },
+//       {
+//         test: /\.js$/,
+//         loader: 'babel',
+//         exclude: /node_modules/
+//       },
+//       {
+//         test: /\.(gif|jpg|png|woff|svg|eot|ttf)$/,
+//         loader: 'file',
+//         options: {
+//           limit: 50000,
+//           name: '[name].[ext]?[hash]'
+//         }
+//       },
+//       { 
+//         test: /\.css$/, 
+//         loader: "style-loader!css-loader" 
+//       }
+//     ]
+//   },
+//   resolve: {
+//     alias: {
+//       'vue$': 'vue/dist/vue'
+//     }
+//   },
+//   devServer: {
+//     historyApiFallback: true,
+//     noInfo: true
+//   },
+//   devtool: '#eval-source-map'
+// }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
