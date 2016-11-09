@@ -55,16 +55,11 @@ export default {
 
             var $_txt = editor_m.$txt;
             $_txt.on('blur', function(){
-                 console.log('---------blur-----')
-                 if(this.html() != self.content){
-                    console.log('-change-');
-                    self.formatContent($_txt.html())
+                var _current = $_txt.html();
+                 if(_current != self.content){
+                    self.formatContent(_current)
                  }
             })
-            // self.interval = setInterval(function() {
-                // console.log('---------interval-----')
-                // self.formatContent($_txt.html())
-            // }, 1500);
         },
         formatContent(content) {
             this.content = content;

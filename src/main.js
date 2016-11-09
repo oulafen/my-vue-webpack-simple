@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//base js
+import zepto from '../statics/js/zepto.min.js'
+import base from '../statics/js/base.js'
+
 //components lists
 import App from './App.vue';
 import Index from './components/index.vue';

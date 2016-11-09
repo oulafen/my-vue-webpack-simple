@@ -2,10 +2,10 @@
     <div class="editor-demo">
         <div class="editor-box" v-if="!is_phone">
              <p>PC端编辑器</p>
-            <v-editor
+            <v-pc-editor
             :input-content="inputContent"
             :upload-url="uploadUrl"
-            v-model="outputContent"></v-editor>
+            v-model="outputContent"></v-pc-editor>
             <input type="button" name="name" value="submit" @click="submit">
         </div>
                    
@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import Editor from './editor.vue'
+import pcEditor from './editor-pc.vue'
 import mobileEditor from './editor-mobile.vue'
-import Browser from '../../statics/js/browser.js'
 export default {
     data() {
         return {
@@ -45,10 +44,12 @@ export default {
     },
     computed: {},
     mounted() {
-        this.is_phone = browser.versions.android || browser.versions.iPhone || browser.versions.iPad;
+        var browser = $.fn.browser();
+        this.is_phone = browser.android || browser.iPhone || browser.iPad;
         if(this.is_phone){
             $('.wangEditor-container').hide();
-        }    
+        }  
+        $('.loading').hide();  
     },
     attached() {},
     methods: {
@@ -57,7 +58,7 @@ export default {
         }
     },
     components: {
-        'v-editor': Editor,
+        'v-pc-editor': pcEditor,
         'v-mobile-editor': mobileEditor
     }
 }
