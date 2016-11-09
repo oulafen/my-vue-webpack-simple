@@ -8,18 +8,18 @@ import base from '../statics/js/base.js'
 
 //components lists
 import App from './App.vue';
-import Index from './components/index.vue';
+// import Index from './components/index.vue';
 
-import home from './components/home.vue';
-import personal from './components/personal.vue';
-import lists from './components/lists.vue';
-import detail from './components/detail.vue';
-import user from './components/user.vue';
-import form from './components/form.vue';
-import markdown from './components/markdown.vue';
-import editor_demo from './components/editor-demo.vue';
+// import home from './components/home.vue';
+// import personal from './components/personal.vue';
+// import lists from './components/lists.vue';
+// import detail from './components/detail.vue';
+// import user from './components/user.vue';
+// import form from './components/form.vue';
+// import markdown from './components/markdown.vue';
+// import editor_demo from './components/editor-demo.vue';
 
-import editor_mobile_demo from './components/editor-mobile-demo.vue';
+// import editor_mobile_demo from './components/editor-mobile-demo.vue';
 
 const app = Vue.extend(App);
 
