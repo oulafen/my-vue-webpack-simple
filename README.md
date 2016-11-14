@@ -9,7 +9,7 @@ vue init webpack-sample my-vue-webpack-simple  # 创建基于模板webpack-sampl
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -87,7 +87,7 @@ new app({
 
 ## 添加组件
  - 改写`home.vue`
-```vue
+```html
 <template>
     <div id="home">
      <h1>{{ msg }}</h1>
@@ -175,16 +175,26 @@ import marked from '../../statics/js/marked@0.3.6.js'
 ```
 - 给代码加高亮
 引入highlight的js和css, 再在marked方法中配置下就OK了, 以下给出增加的代码片段, 插到相应位置上就可以了
-```
-<link rel="stylesheet" href="../../statics/css/solarized_light.min.css">
+```html
+<template>
+  <div id="editor">
+    <link rel="stylesheet" href="../../statics/css/solarized_light.min.css">
+    <!-- ... -->
+  </div>
+</template>
+<script>
+//...
 import hljs from '../../statics/js/highlight.min'
+//...
+    return marked(this.input, {
+        sanitize: true,
+        highlight: function(code, lang) {
+            return hljs.highlightAuto(code, [lang]).value;
+        }
+    })
+//...
+</script>
 
-return marked(this.input, {
-    sanitize: true,
-    highlight: function(code, lang) {
-        return hljs.highlightAuto(code, [lang]).value;
-    }
-})
 ```
 - 更多的设置自行google
 源码中默认的配置参数:
@@ -206,6 +216,84 @@ marked.defaults = {
   renderer: new Renderer,
   xhtml: false
 };
+```
+
+## vue webpack 按需加载的实现
+我们知道在这之前，使用vue webpack 模板构建出的项目是将所有的js都编译到一个`build.js`文件中，旨在只加载一次资源，后续会有本地化app的效果，但当业务逻辑较多，组件较多时，这个文件就会很大，从而使首屏加载的时间very very long~，第一次进入项目就要等上半分乃至几分钟，要是我的话肯定等不鸟→_→; 
+那么读到这里，有点经验的肯定会想到，能不能优化成类似requirejs的按需加载，首屏不需要的资源先不加载，到使用时再下载下来；官网的东西还是很强大的，虽然目前国内还没什么现成的例子，但通过官方文档，还是能进展一二的。废话不多说了，下面重点来了
+- 更改`webpack.config.js`文件，使用webpack的chunk [查看CommonChunks插件](https://webpack.toobug.net/zh-cn/chapter3/common-chunks-plugin.html)
+```javascript
+//...
+//初始化wenpack 自带的 chunk 插件
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common'); 
+module.exports = {
+  entry: './src/main.js',  //可引入多个入口文件，编译后的文件个数也会相应增多
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: 'dist/',
+    filename: '[name].js',  //自动生成文件名
+    chunkFilename: "chunts/[name]-[chunkhash:8].js"    //生成的子文件路劲/文件名
+  },
+  //...
+  plugins: [ commonsPlugin ],
+  //...
+}
+//...
+```
+- 修改入口文件`src/main.js`
+之前的路由写法：
+```javascript
+import home from './components/home.vue';
+import lists from './components/lists.vue';
+
+const routes = [
+  { path: '/', component: Index },
+  { path: '/home', component: home },
+  { path: '/lists', component: lists }
+];
+```
+
+修改之后：[点击查看官网异步组件模块](https://cn.vuejs.org/v2/guide/components.html#异步组件)
+```javascript
+const routes = [
+  { 
+    path: '/',
+    component: function (resolve) {
+      require(['./components/index.vue'], resolve) 
+    }
+  },
+  { 
+    path: '/home',
+    component: function (resolve) {
+      require(['./components/home.vue'], resolve) 
+    }
+  },
+  { 
+    path: '/lists',
+    component: function (resolve) {
+      require(['./components/lists.vue'], resolve) 
+    }
+  }
+];
+```
+- 在`index.html`中替换依赖文件`build.js`
+
+```html
+<script src="./dist/common.js"></script>
+<script src="./dist/main.js"></script>
+```
+- 执行`npm run build`，编译后的文件结构如下
+```
+├── dist/                      # 编译后的目标文件夹
+│   ├── common.js              # js分发文件
+│   ├── main.js                # 压缩处理后的入口文件
+│   └── chunts                 # 按需加载的子文件夹
+│        ├── 0-xxxxxx.js        
+│        ├── 1-xxxxxx.js
+│        ├── 2-xxxxxx.js
+│        └── ...
+├── ...
+
 ```
 
 ## 问题总结

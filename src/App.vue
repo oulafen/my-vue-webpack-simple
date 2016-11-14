@@ -7,10 +7,3 @@
     </transition>
   </div>
 </template>
-<script>
-export default{
-	mounted() {
-        $('.loading').hide();
-    }
-}
-</script>
