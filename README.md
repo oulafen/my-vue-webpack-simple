@@ -23,6 +23,7 @@ npm run build
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # Next(开刀阔斧balabala的事儿)
+线上预览地址[http://blog.oulafen.com/my-vue-webpack-simple/](http://blog.oulafen.com/my-vue-webpack-simple/)
 ## 使用vue-router
 - 安装 `npm install vue-router --save`
 - 配置router
@@ -134,6 +135,7 @@ export default {
     </div>
 </template>
 ```
+
 ## 使用简单的markdown编辑器
 [示例地址](http://blog.oulafen.com/my-vue-webpack-simple/#/markdown)
 - 引入官网marked文件
@@ -174,7 +176,7 @@ import marked from '../../statics/js/marked@0.3.6.js'
 </style>
 ```
 - 给代码加高亮
-引入highlight的js和css, 再在marked方法中配置下就OK了, 以下给出增加的代码片段, 插到相应位置上就可以了
+引入 highlight 的 js 和 css , 再在 marked 方法中配置下就OK了, 以下给出增加的代码片段, 插到相应位置上就可以了
 ```html
 <template>
   <div id="editor">
@@ -219,12 +221,13 @@ marked.defaults = {
 ```
 
 ## vue webpack 按需加载的实现
-我们知道在这之前，使用vue webpack 模板构建出的项目是将所有的js都编译到一个`build.js`文件中，旨在只加载一次资源，后续会有本地化app的效果，但当业务逻辑较多，组件较多时，这个文件就会很大，从而使首屏加载的时间very very long~，第一次进入项目就要等上半分乃至几分钟，要是我的话肯定等不鸟→_→; 
+我们知道在这之前，使用vue webpack 模板构建出的项目是将所有的js都编译到一个`build.js`文件中，旨在只加载一次资源，后续会有本地化app的效果，但当业务逻辑较多，组件较多时，这个文件就会很大，从而使首屏加载的时间very very long ~，第一次进入项目就要等上半分乃至几分钟，要是我的话肯定等不鸟→_→; 
+
 那么读到这里，有点经验的肯定会想到，能不能优化成类似requirejs的按需加载，首屏不需要的资源先不加载，到使用时再下载下来；官网的东西还是很强大的，虽然目前国内还没什么现成的例子，但通过官方文档，还是能进展一二的。废话不多说了，下面重点来了
 - 更改`webpack.config.js`文件，使用webpack的chunk [查看CommonChunks插件](https://webpack.toobug.net/zh-cn/chapter3/common-chunks-plugin.html)
 ```javascript
 //...
-//初始化wenpack 自带的 chunk 插件
+//初始化webpack 自带的 chunk 插件
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common'); 
 module.exports = {
   entry: './src/main.js',  //可引入多个入口文件，编译后的文件个数也会相应增多
