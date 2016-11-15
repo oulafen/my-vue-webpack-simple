@@ -30,6 +30,7 @@ export default {
     },
     mounted() {
         this.createEditor()
+        $('.loading').hide();
     },
     methods: {
         submit() {

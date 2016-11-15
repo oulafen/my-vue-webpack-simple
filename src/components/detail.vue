@@ -32,6 +32,9 @@
     export default{
         components: {
             'my_footer' : my_footer
+        },
+        mouted(){
+             $('.loading').hide();
         }
     }
 </script>

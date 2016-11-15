@@ -256,7 +256,7 @@ const routes = [
 ];
 ```
 
-修改之后：[点击查看官网异步组件模块](https://cn.vuejs.org/v2/guide/components.html#异步组件)
+修改之后：[点击查看官网-异步组件模块](https://cn.vuejs.org/v2/guide/components.html#异步组件)
 ```javascript
 const routes = [
   { 
@@ -279,12 +279,30 @@ const routes = [
   }
 ];
 ```
+
+或者改写成这样：(是不是更加一目了然呢😝)
+```javascript
+const routes = [
+  { path: '/', component: view('index') },
+  { path: '/home', component: view('home') },
+  { path: '/lists', component: view('lists') }
+];
+
+//rebase url `./components/`
+function view(name) {
+    return function(resolve) {
+        require(['./components/' + name + '.vue'], resolve);
+    }
+};
+```
+
 - 在`index.html`中替换依赖文件`build.js`
 
 ```html
 <script src="./dist/common.js"></script>
 <script src="./dist/main.js"></script>
 ```
+
 - 执行`npm run build`，编译后的文件结构如下
 ```
 ├── dist/                      # 编译后的目标文件夹
@@ -297,6 +315,65 @@ const routes = [
 │        └── ...
 ├── ...
 
+```
+
+## 切换路由效果
+[点击查看官网-过渡效果的介绍](http://router.vuejs.org/zh-cn/advanced/transitions.html)
+- 应用场景：同级路由间切换用`fade`动效，不同级路由间切换时，用`slide-left`和`slide-right`
+- 修改`src/App.vue`文件
+```html
+<template>
+  <div class="main">
+    <transition :name="routerTransition" mode="out-in" appear>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </div>
+</template>
+<script>
+  export default{
+    data(){
+      return {
+        routerTransition: 'fade'
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        const toDepth = to.path.split('/').length
+        const fromDepth = from.path.split('/').length
+
+        if(toDepth != fromDepth){
+          this.routerTransition = toDepth < fromDepth ? 'slide-right' : 'slide-left'          
+        }else{
+          this.routerTransition = 'fade'
+        }
+      }
+    }
+  }
+</script>
+```
+- 添加动效css
+```css
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0;
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(30px, 0);
+  transform: translate(30px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-30px, 0);
+  transform: translate(-30px, 0);
+}
+.slide-left-enter-active, .slide-left-leave-active, .slide-right-enter-active, .slide-right-leave-active{
+  transition: all .3s cubic-bezier(.55,0,.1,1);
+}
 ```
 
 ## 问题总结

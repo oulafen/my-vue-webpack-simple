@@ -42,12 +42,7 @@
         methods:{
             choose(index) {
                 this.selected = index;
-                this.currentView='view_'+index;
-            }
-        },
-        route:{
-            data() {
-                /*每次切换路由，在渲染出页面前都会执行*/
+                this.currentView = 'view_' + index;
             }
         }
     }

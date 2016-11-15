@@ -21,6 +21,9 @@
                 input: '# input markdown'
             }
         },
+        created() { 
+            $('.loading').hide();
+        },
         computed: {
             compiledMarkdown: function () {
                 return marked(this.input, {
