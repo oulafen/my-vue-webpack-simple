@@ -1,6 +1,6 @@
 <template>
     <div id="editor">
-        <link rel="stylesheet" href="../../statics/css/solarized_light.min.css">
+        <link rel="stylesheet" href="./statics/css/solarized_light.min.css">
         <textarea :value="input" v-model="input"></textarea>
         <div class="weui-panel">
             <div class="weui-panel__hd">markdown预览</div>
