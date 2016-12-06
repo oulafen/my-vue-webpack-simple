@@ -376,6 +376,32 @@ function view(name) {
 }
 ```
 
+## 使用scss
+- 安装依赖
+```
+npm install sass-loader node-sass --save-dev
+```
+- 配置webpack config
+```
+module.exports = {
+  ...
+  module: {
+    rules: [
+      ...,
+      {
+        test: /\.scss$/,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      }
+    ]
+  }
+};
+```
+- 在模块中引入scss文件
+```js
+require("../statics/css/style.scss");
+```
+参考链接:[https://github.com/jtangelder/sass-loader](https://github.com/jtangelder/sass-loader)
+
 ## 问题总结
 - build项目之后, 静态资源的如图片加载失败
     原因肯定是路径不对, 所以才找不到, 建议将`webpack.config.js`中的`publicPath`改为路径`dist/`, 若不行,再查看其它有关路径设置的地方
